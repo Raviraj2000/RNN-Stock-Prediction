@@ -76,11 +76,12 @@ predicted_stock = regressor.predict(X_test)
 predicted_stock = sc.inverse_transform(predicted_stock)
 
 
-plt.figure(figsize=(20, 8))
-plt.plot(data_test, label = 'Real Stock Price')
-plt.plot(predicted_stock, label = 'Predicted Stock Price')
-plt.xlabel('Year')
-plt.ylabel('Price')
+train_data=data[:987]
+valid_data=data[987:]
+valid_data['Predictions']=predicted_stock
+plt.plot(train_data["Close"], label = 'Train Stock Price')
+plt.plot(valid_data['Close'], label = 'Test Stock Price')
+plt.plot(valid_data['Predictions'], label = 'Predicted Stock Price')
 plt.legend()
 plt.show()
 
